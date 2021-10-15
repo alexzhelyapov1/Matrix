@@ -1,9 +1,37 @@
 #include <stdlib.h>
 #include <stdio.h>
+#define DEBUG
 
+#ifdef DEBUG
+	#define IF_DEBUG(code) code
+#else
+	#define IF_DEBUG(code)  
+#endif
 
+/*!
+Fill in matrix from std input from console
+\param[in] matrix 	Pointer to array of int
+\param[in] a 		Count of strings
+\param[in] b			Count of columns
+*/
 void ScanMatrix (int *matrix, int a, int b);
+
+
+/*!
+Print matrix from std input from console
+\param[in] matrix 	Pointer to array of int
+\param[in] a 		Count of strings
+\param[in] b			Count of columns
+*/
 void PrintMatrix (int *matrix, int a, int b);
+
+
+/*!
+Multiply matrices
+\param[in] first_matrix 	Pointer to first matrix size a * b
+\param[in] second_matrix 	Pointer to second matrix size b * y
+\param[in] result_matrix 	Pointer to resulting matrix (result size a * y)
+*/
 void MultiplyMatrix (int *first_matrix, int *second_matrix, int *result_matrix,	int a, int b, int y);
 
 
@@ -19,9 +47,9 @@ int main () {
 	int *result_matrix = (int *) calloc (a * y, sizeof (int));
 
 	ScanMatrix (first_matrix, a, b);
-	//PrintMatrix (first_matrix, a, b);
+	IF_DEBUG(PrintMatrix (first_matrix, a, b);)
 	ScanMatrix (second_matrix, x, y);
-	//PrintMatrix (second_matrix, x, y);
+	IF_DEBUG(PrintMatrix (second_matrix, x, y);)
 	MultiplyMatrix (first_matrix, second_matrix, result_matrix, a, b, y);
 	PrintMatrix (result_matrix, a, y);
 
@@ -43,12 +71,14 @@ void ScanMatrix (int *matrix, int a, int b) {
 
 
 void PrintMatrix (int *matrix, int a, int b) {
+	IF_DEBUG(printf ("--------------------------\nDebug printing\n");)
 	for (int i = 0; i < a; i++) {
 		for (int j = 0; j < b; j++) {
 			printf ("%d ", matrix[i * b + j]);
 		}
 		printf ("\n");
 	}
+	IF_DEBUG(printf ("--------------------------\n");)
 }
 
 
